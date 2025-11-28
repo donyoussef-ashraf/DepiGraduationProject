@@ -667,6 +667,7 @@ class CommentsPage extends StatelessWidget {
                   final c = ctrl.comments[i];
                   final time = c.createdAt != null ? DateFormat.yMd().add_jm().format(c.createdAt!.toLocal()) : '';
                   return ListTile(
+                    contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 12),
                     leading: CircleAvatar(child: Text(c.username.isNotEmpty ? c.username[0].toUpperCase() : '?')),
                     title: Text(c.username),
                     subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -683,9 +684,13 @@ class CommentsPage extends StatelessWidget {
                     ]),
                     trailing: Column(
                       children: [
-                        IconButton(
-                          icon: Icon(Icons.thumb_up, color: c.likes > 0 ? Colors.green.shade700 : Colors.grey),
-                          onPressed: () => ctrl.likeComment(c),
+                        SizedBox(
+                          height: 35,
+                          child: IconButton(
+                            
+                            icon: Icon(Icons.thumb_up, color: c.likes > 0 ? Colors.green.shade700 : Colors.grey),
+                            onPressed: () => ctrl.likeComment(c),
+                          ),
                         ),
                         Text('${c.likes}'),
                       ],

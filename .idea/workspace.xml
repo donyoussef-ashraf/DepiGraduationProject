@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ee955dd5-b5b5-4658-90e4-d83f0a456dd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delleni_app/lib/app/controllers/service_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/delleni_app/lib/app/controllers/service_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delleni_app/lib/app/pages/comments_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/delleni_app/lib/app/pages/comments_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delleni_app/lib/app/pages/entry_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/delleni_app/lib/app/pages/entry_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/delleni_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/delleni_app/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

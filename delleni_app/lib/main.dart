@@ -31,6 +31,7 @@ class Delleni extends StatelessWidget {
 
     return GetMaterialApp(
       title: "Delleni",
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: green,
         scaffoldBackgroundColor: Colors.white,

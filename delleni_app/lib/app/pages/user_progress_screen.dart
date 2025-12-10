@@ -113,23 +113,42 @@ class ServicesTrackingPage extends StatelessWidget {
               );
             }
             
-            if (controller.services.isEmpty) {
+            // Filter services to only show those with progress
+            final userId = controller.supabase.auth.currentUser?.id;
+            final servicesWithProgress = controller.services.where((service) {
+              if (userId == null) return false;
+              final key = '${userId}_${service.id}';
+              final progress = controller.progressBox.get(key);
+              // Only show if progress exists and at least one step is completed
+              return progress != null && progress.stepsCompleted.any((step) => step);
+            }).toList();
+            
+            if (servicesWithProgress.isEmpty) {
               return SliverFillRemaining(
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.inbox_outlined,
+                        Icons.track_changes_outlined,
                         size: isDesktop ? 100 : isTablet ? 80 : 64,
                         color: Colors.grey[300],
                       ),
                       SizedBox(height: 16),
                       Text(
-                        'لا توجد خدمات حالياً',
+                        'لا توجد طلبات قيد المتابعة',
                         style: TextStyle(
                           fontSize: isDesktop ? 20 : isTablet ? 18 : 16,
-                          color: Colors.grey,
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'ابدأ بتقديم خدمة من الصفحة الرئيسية',
+                        style: TextStyle(
+                          fontSize: isDesktop ? 16 : isTablet ? 15 : 14,
+                          color: Colors.grey[500],
                         ),
                       ),
                     ],
@@ -144,8 +163,8 @@ class ServicesTrackingPage extends StatelessWidget {
                 vertical: 10,
               ),
               sliver: isDesktop
-                  ? _buildDesktopGrid(controller)
-                  : _buildMobileList(controller, isTablet),
+                  ? _buildDesktopGrid(servicesWithProgress, controller)
+                  : _buildMobileList(servicesWithProgress, controller, isTablet),
             );
           }),
           
@@ -161,7 +180,7 @@ class ServicesTrackingPage extends StatelessWidget {
   Widget _buildStatusCards(ServiceController controller, bool isTablet, bool isDesktop) {
     final userId = controller.supabase.auth.currentUser?.id;
     
-    int totalServices = controller.services.length;
+    int totalServices = 0;
     int completedServices = 0;
     int inProgressServices = 0;
     
@@ -169,7 +188,8 @@ class ServicesTrackingPage extends StatelessWidget {
       for (var service in controller.services) {
         final key = '${userId}_${service.id}';
         final progress = controller.progressBox.get(key);
-        if (progress != null) {
+        if (progress != null && progress.stepsCompleted.any((step) => step)) {
+          totalServices++;
           int completed = progress.stepsCompleted.where((s) => s).length;
           int total = service.steps.length;
           if (completed == total && total > 0) {
@@ -299,7 +319,7 @@ class ServicesTrackingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildDesktopGrid(ServiceController controller) {
+  Widget _buildDesktopGrid(List<Service> services, ServiceController controller) {
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -309,22 +329,22 @@ class ServicesTrackingPage extends StatelessWidget {
       ),
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          final service = controller.services[index];
+          final service = services[index];
           return _buildServiceCard(service, controller, true, true);
         },
-        childCount: controller.services.length,
+        childCount: services.length,
       ),
     );
   }
 
-  Widget _buildMobileList(ServiceController controller, bool isTablet) {
+  Widget _buildMobileList(List<Service> services, ServiceController controller, bool isTablet) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          final service = controller.services[index];
+          final service = services[index];
           return _buildServiceCard(service, controller, isTablet, false);
         },
-        childCount: controller.services.length,
+        childCount: services.length,
       ),
     );
   }

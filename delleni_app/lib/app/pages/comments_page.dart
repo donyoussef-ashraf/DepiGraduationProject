@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CommentsPage extends StatelessWidget {
-  CommentsPage({Key? key}) : super(key: key);
+  CommentsPage({super.key});
   final ServiceController ctrl = Get.find();
   final TextEditingController textCtrl = TextEditingController();
 

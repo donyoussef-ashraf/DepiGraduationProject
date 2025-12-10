@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ServiceDetailPage extends StatelessWidget {
-  ServiceDetailPage({Key? key}) : super(key: key);
+  ServiceDetailPage({super.key});
   final ServiceController ctrl = Get.find();
 
   @override

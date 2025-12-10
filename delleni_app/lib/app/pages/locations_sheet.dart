@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LocationsSheet extends StatelessWidget {
-  LocationsSheet({Key? key}) : super(key: key);
+  LocationsSheet({super.key});
   final ServiceController ctrl = Get.find();
 
   @override

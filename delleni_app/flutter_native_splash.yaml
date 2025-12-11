@@ -1,0 +1,27 @@
+flutter_native_splash:
+  # ================== COMMON SETTINGS ==================
+
+  # Background color for all platforms
+  color: "#F1F3F4"
+
+  # Main centered logo (transparent PNG recommended)
+  image: "assets/logo_delleni.png"
+
+  # Hide status bar during splash
+  fullscreen: true
+
+
+  # ================== ANDROID 12+ SETTINGS ==================
+
+  android_12:
+    # Background color
+    color: "#F1F3F4"
+
+    # Full-screen splash background image (the 1080×2400 image)
+    background_image: "assets/Landing.png"
+
+    # Center logo
+    image: "assets/logo_delleni.png"
+
+    # Remove circular cropping background by matching your color
+    icon_background_color: "#F1F3F4"

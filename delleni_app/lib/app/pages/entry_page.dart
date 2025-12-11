@@ -11,12 +11,15 @@ class EntryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () async {
-            final result = await AuthService().logout();
-            if(result){
-              Get.off(Login());
-            }
-          }, icon: const Icon(Icons.logout))
+          IconButton(
+            onPressed: () async {
+              final result = await AuthService().logout();
+              if (result) {
+                Get.off(Login());
+              }
+            },
+            icon: const Icon(Icons.logout),
+          ),
         ],
       ),
     );

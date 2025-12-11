@@ -21,13 +21,14 @@ class UserProgressAdapter extends TypeAdapter<UserProgress> {
       serviceId: fields[1] as String,
       stepsCompleted: (fields[2] as List).cast<bool>(),
       lastUpdated: fields[3] as DateTime,
+      status: fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserProgress obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class UserProgressAdapter extends TypeAdapter<UserProgress> {
       ..writeByte(2)
       ..write(obj.stepsCompleted)
       ..writeByte(3)
-      ..write(obj.lastUpdated);
+      ..write(obj.lastUpdated)
+      ..writeByte(4)
+      ..write(obj.status);
   }
 
   @override

@@ -17,6 +17,9 @@ class CommentsPage extends StatefulWidget {
 
 class _CommentsPageState extends State<CommentsPage> {
   final ServiceController ctrl = Get.find<ServiceController>();
+class CommentsPage extends StatelessWidget {
+  CommentsPage({super.key});
+  final ServiceController ctrl = Get.find();
   final TextEditingController textCtrl = TextEditingController();
 
   @override
